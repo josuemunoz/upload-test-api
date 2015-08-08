@@ -16,7 +16,7 @@ function upload(){
 var ajax = new XMLHttpRequest();
 	ajax.upload.addEventListener("progress", progressHandler, false);
 	ajax.addEventListener("load", complete, false);
-	ajax.open("POST", "http://www.45graphics.net/upload.php");
+	ajax.open("POST", "http://www.45graphics.net/uploadtest1/upload.php");
 	ajax.send(formdata);
 }
 function progressHandler(event){
