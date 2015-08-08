@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" language="javascript">
+function _(el){
+	return document.getElementById(el);
+	}
+	
+function upload(){
+	
+	var file = _("file").files[0];
+	var formdata = new FormData();
+		formdata.append("file", file);
+		formdata.append("folder", "imageFile");
+		
+var ajax = new XMLHttpRequest();
+	ajax.upload.addEventListener("progress", progressHandler, false);
+	ajax.addEventListener("load", complete, false);
+	ajax.open("POST", "http://www.45graphics.net/upload.php");
+	ajax.send(formdata);
+}
+function progressHandler(event){
+	//alert("its running");
+	
+	var Percent = (event.loaded / event.total) * 100;
+	_("status").innerHTML = Math.round(Percent)+"% uploaded... please wait";
+	_("bar").value = Math.round(Percent);
+	
+	}
+function complete(event){
+		//alert("file uploaded");
+		_("bar").value = 0;
+		_("status").innerHTML = '';
+		_("file").value= "";
+		var obj = JSON.parse(event.target.responseText);
+		alert(obj[0].a + ' with name: '+ obj[0].image);
+	}
+</script>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+
+
+
+<body>
+<h1 id="status"></h1>
+<progress id="bar" value="0" max="100" style="width:500px;"></progress>
+ 
+<form name="form1" method="post" action="upload.php" enctype="multipart/form-data">
+ 
+<input name="file" type="file" id="file">
+<input type="button" value="Upload" onClick="upload()">
+</form>
+
+
+
+</body>
+</html>
