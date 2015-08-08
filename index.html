@@ -22,7 +22,7 @@ var ajax = new XMLHttpRequest();
 function progressHandler(event){
 	//alert("its running");
 	
-	var Percent = (event.loaded / event.total) * 100;
+	var Percent = (window.event.loaded / window.event.total) * 100;
 	_("status").innerHTML = Math.round(Percent)+"% uploaded... please wait";
 	_("bar").value = Math.round(Percent);
 	
